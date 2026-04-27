@@ -1,0 +1,39 @@
+# Python Encryption Program
+
+import random                     # import random module for shuffling
+import string                     # import string module for character sets
+
+chars = " " + string.punctuation + string.digits + string.ascii_letters
+# create a string of all possible characters (space, symbols, numbers, letters)
+
+chars = list(chars)              # convert string into a list
+key = chars.copy()               # make a copy of chars for encryption key
+
+random.shuffle(key)              # shuffle key to create random encryption mapping
+
+# print(f"chars: {chars}")       # original characters
+# print(f"key : {key}")          # shuffled encryption key
+
+
+# ENCRYPT
+plain_text = input("Enter a message to encrypt: ")   # get message from user
+cipher_text = ""               # empty string to store encrypted message
+
+for letter in plain_text:      # loop through each character in message
+    index = chars.index(letter) # find character position in original chars
+    cipher_text += key[index]   # use same position in key to encrypt
+
+print(f"original message: {plain_text}")   # print original text
+print(f"encrypted message: {cipher_text}") # print encrypted text
+
+
+# DECRYPT
+cipher_text = input("Enter a message to decrypt: ") 
+plain_text = ""               # empty string for decrypted message
+
+for letter in cipher_text:    # loop through encrypted message
+    index = key.index(letter) # find character position in key
+    plain_text += chars[index] # use same position in original chars to decrypt
+
+print(f"encrypted message: {cipher_text}") # print encrypted text
+print(f"original message: {plain_text}")   # print decrypted text
